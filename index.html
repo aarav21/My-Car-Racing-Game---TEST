@@ -1,38 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body{
-	background-image: url("car1.gif");
-    background-position: center;
-    background-size: cover;
-}
-#myCanvas
-{
-	border-width:10px;
-	background-color: white; 
-	border-style:ridge;
-}
+	<style>
+		body {
+			/* background-image: url("assets/track.png");  */
+			background-position: center;
+			background-size: cover;
+		}
 
-h1,h4
-{
-	color: white !important;
-}
-</style>		
-	<title>Car Racing Game on Canvas </title>
+		#myCanvas {
+			border-width: 10px;
+			background-color: gray;
+			border-style: ridge;
+		}
+
+		h1,
+		h4 {
+			color: white !important;
+		}
+	</style>
+	<title>Car Racing Game</title>
 </head>
-<body onload="add();">
-
-<center>	
-
-<h1>Car Racing Game on Canvas </h1>
-<canvas width="800" height="600" id="myCanvas"></canvas>
-<h4>
-	<b class="text-danger">NOTE : </b> IF Car IS NOT VISBALE PRESS ANY ARROW KEY
-</h4>
-
-</center>
-<script src="main.js">
-</script>
+<body>
+	<h1>Car Racing Game</h1>
+	<div style="text-align: center;">
+		<canvas width="800" height="600" id="myCanvas"></canvas>
+	</div>
+	<script src="main.js"></script>
 </body>
 </html>

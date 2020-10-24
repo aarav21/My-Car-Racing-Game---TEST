@@ -1,160 +1,152 @@
-canvas = document.getElementById("myCanvas");
-ctx = canvas.getContext("2d");
 
-background_image = "Race Track.png"
-Car_1 = "Car_1.png";
-car_2 = "Car_2.png"
+// create main canvas
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
 
-Car1_x = 200;
-Car1_y = 500;
-
-Car2_x = 290;
-Car2_y = 510;
-
-Car2_height = 100;
-Car2_width = 150;
-
-Car1_height = 100;
-Car1_width = 150;
-
-function add() {
-    background_of_canvas = new Image();
-    console.log(background_of_canvas);
-    background_of_canvas.onload = uploadBackground();
-    background_of_canvas.src = background_image;
-
-    Car_1 = new Image();
-    console.log(Car_1);
-    Car_1.onload = uploadCar1();
-    Car_1.src = "Car_1.png";
-
-    Car_2 = new Image();
-    console.log(Car_2);
-    Car_2.onload = uploadCar2();
-    Car_2.src = "Car_2.png";
-
-
-}
-
-function uploadBackground() {
-    ctx.drawImage(background_of_canvas, 0, 0, canvas.width, canvas.height);
-    console.log("uploaded")
-}
-
-function uploadCar1() {
-    ctx.drawImage(Car_1, Car1_x, Car1_y, Car1_width, Car1_height);
-    console.log("uploaded1")
-}
-
-function uploadCar2() {
-    ctx.drawImage(Car_2, Car2_x, Car2_y, Car2_width, Car2_height);
-    console.log("uploaded2")
-}
-
-
+// event handlers
 window.addEventListener("keydown", key_press);
 
-/*Car_1 Functions*/
+// x and y coordinates for green car
+x1 = 200;
+y1 = 500;
+
+// car height and width
+carHeight = 100;
+carWidth = 150;
+
+// initialize green car
+var greenCar = new Image();
+greenCar.src = "./assets/greenCar.png";
+greenCar.onload = function () {
+    ctx.drawImage(greenCar, x1, y1, carWidth, carHeight);
+}
+
+// initialize blue car
+var blueCar = new Image();
+blueCar.src = "./assets/blueCar.png";
+blueCar.onload = function () {
+    ctx.drawImage(blueCar, (x1 + 25) , (y1 + 20), carWidth, carHeight);
+}
+
+// initialize background
+var background = new Image();
+background.src = "./assets/track.png";
+background.onload = function () {
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+}
+
+/* functions */
+function setCanvasBackground() {
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+}
+
+function drawGreenCar() {
+    ctx.drawImage(greenCar, x1, y1, carWidth, carHeight);
+}
+
+function drawBlueCar() {
+    ctx.drawImage(blueCar, (x1 + 25) , (y1 + 20), carWidth, carHeight);
+}
 
 function key_press(e) {
     keypressed = e.keyCode;
-    console.log(keypressed);
 
+    // left arrow key
     if (keypressed == '37') {
-        left();
+        moveLeft(e.keyCode);
     }
 
+    // up arrow key
     if (keypressed == '38') {
-        up();
+        moveUp();
     }
 
+    // right Arrow key
     if (keypressed == '39') {
-        right();
+        moveRight();
     }
 
+    // down Arrow key
     if (keypressed == '40') {
-        down();
+        moveDown();
     }
 
+    // Key = 'D'
     if (keypressed == '68') {
-        right2()
+        moveRight2()
     }
-// This is "S" 
+
+    // Key = 'S'
     if (keypressed == '83') {
-        down2()
+        moveDown2()
+    }
+
+    // Key = 'W'
+    if (keypressed == '87') {
+        moveUp2()
+    }
+
+    // Key = 'A'
+    if (keypressed == '65') {
+        moveLeft(e.keyCode)
     }
 }
 
-function left() {
-    if (Car1_x > 0) {
-        Car1_x = Car1_x - 10;
-        ctx.save();
-        ctx.rotate(10);
-        // draw your object
-        ctx.restore();
-        uploadBackground();
-        uploadCar1();
+function moveLeft(key) {
+    
+    switch(key)
+    {
+        case 65:
+        {
+            if (x2 > 0) {
+                x2 = x2 - 10;
+                ctx.save();
+                ctx.rotate(10);
+                ctx.restore();
+                setCanvasBackground()
+                drawBlueCar();
+                drawGreenCar();
+            }
+        }
+        case 37:
+        {
+            if (x1 > 0) {
+                console.log(key)
+                x1 = x1 - 10;
+                ctx.save();
+                ctx.rotate(10);
+                ctx.restore();
+                setCanvasBackground();
+                drawBlueCar();
+                drawGreenCar();
+            }
+        }
+    }    
+}
+
+function moveUp() {
+    if (y1 > 0) {
+        y1 = y1 - 10;
+        setCanvasBackground();
+        drawBlueCar();
+        drawGreenCar();
     }
 }
 
-function up() {
-    if (Car1_y > 0) {
-        Car1_y = Car1_y - 10;
-        uploadBackground();
-        uploadCar1();
+function moveRight() {
+    if (x1 < 650) {
+        x1 = x1 + 10;
+        setCanvasBackground();
+        drawBlueCar();
+        drawGreenCar();
     }
 }
 
-function right() {
-    if (Car1_x < 650) {
-        Car1_x = Car1_x + 10;
-        uploadBackground();
-        uploadCar1();
-    }
-}
-
-function down() {
-    if (Car1_y < 500) {
-        Car1_y = Car1_y + 10;
-        uploadBackground();
-        uploadCar1();
-    }
-}
-
-
-
-function left2() {
-    if (Car2_x > 0) {
-        Car2_x = Car2_x - 10;
-        ctx.save();
-        ctx.rotate(10);
-        // draw your object
-        ctx.restore();
-        uploadBackground()
-        uploadCar2();
-    }
-}
-
-function up2() {
-    if (Car2_y > 0) {
-        Car2_y = Car2_y - 10;
-        uploadBackground();
-        uploadCar2();
-    }
-}
-
-function right2() {
-    if (Car2_x < 650) {
-        Car2_x = Car2_x + 10;
-        uploadBackground();
-        uploadCar2();
-    }
-}
-
-function down2() {
-    if (Car2_y < 500) {
-        Car2_y = Car2_y + 10;
-        uploadBackground();
-        uploadCar2();
+function moveDown() {
+    if (y1 < 500) {
+        y1 = y1 + 10;
+        setCanvasBackground();
+        drawBlueCar();
+        drawGreenCar();
     }
 }
