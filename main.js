@@ -25,7 +25,7 @@ greenCar.onload = function () {
 var blueCar = new Image();
 blueCar.src = "./assets/blueCar.png";
 blueCar.onload = function () {
-    ctx.drawImage(blueCar, (x1 + 25) , (y1 + 20), carWidth, carHeight);
+    ctx.drawImage(blueCar, (x1 + 25), (y1 + 20), carWidth, carHeight);
 }
 
 // initialize background
@@ -45,7 +45,7 @@ function drawGreenCar() {
 }
 
 function drawBlueCar() {
-    ctx.drawImage(blueCar, (x1 + 25) , (y1 + 20), carWidth, carHeight);
+    ctx.drawImage(blueCar, (x1 + 25), (y1 + 20), carWidth, carHeight);
 }
 
 function key_press(e) {
@@ -58,32 +58,32 @@ function key_press(e) {
 
     // up arrow key
     if (keypressed == '38') {
-        moveUp();
+        moveUp(e.keyCode);
     }
 
     // right Arrow key
     if (keypressed == '39') {
-        moveRight();
+        moveRight(e.keyCode);
     }
 
     // down Arrow key
     if (keypressed == '40') {
-        moveDown();
+        moveDown(e.keyCode);
     }
 
     // Key = 'D'
     if (keypressed == '68') {
-        moveRight2()
+        moveRight(e.keyCode)
     }
 
     // Key = 'S'
     if (keypressed == '83') {
-        moveDown2()
+        moveDown(e.keyCode)
     }
 
     // Key = 'W'
     if (keypressed == '87') {
-        moveUp2()
+        moveUp(e.keyCode)
     }
 
     // Key = 'A'
@@ -93,60 +93,101 @@ function key_press(e) {
 }
 
 function moveLeft(key) {
-    
-    switch(key)
-    {
+    switch (key) {
         case 65:
-        {
-            if (x2 > 0) {
-                x2 = x2 - 10;
-                ctx.save();
-                ctx.rotate(10);
-                ctx.restore();
-                setCanvasBackground()
-                drawBlueCar();
-                drawGreenCar();
+            {
+                if (x1 > 0) {
+                    x1 = x1 - 10;
+                    ctx.save();
+                    ctx.rotate(10);
+                    ctx.restore();
+                    setCanvasBackground()
+                    drawBlueCar();
+                    drawGreenCar();
+                }
             }
-        }
         case 37:
+            {
+                if (x1 > 0) {
+                    console.log(key)
+                    x1 = x1 - 10;
+                    ctx.save();
+                    ctx.rotate(10);
+                    ctx.restore();
+                    setCanvasBackground();
+                    drawBlueCar();
+                    drawGreenCar();
+                }
+            }
+    }
+}
+
+function moveUp(key) {
+    switch (key) {
+        case 87: // W Key
+            {
+                if (y1 > 0) {
+                    y1 = y1 - 10;
+                    setCanvasBackground();
+                    drawBlueCar();
+                    drawGreenCar();
+                }
+            }
+        case 36: // Up Arrow Key 
+            {
+                if (y1 > 0) {
+                    y1 = y1 - 10;
+                    setCanvasBackground();
+                    drawBlueCar();
+                    drawGreenCar();
+                }
+            }
+    }
+}
+
+function moveRight(key) {
+    switch (key) {
+        case 68: // D Key
+            {
+                if (x1 < 650) {
+                    x1 = x1 + 10;
+                    setCanvasBackground();
+                    drawBlueCar();
+                    drawGreenCar();
+                }
+            }
+        case 39: // Right Arrow Key
+            {
+                if (x1 < 650) {
+                    x1 = x1 + 10;
+                    setCanvasBackground();
+                    drawBlueCar();
+                    drawGreenCar();
+                }
+            }
+    }
+
+}
+
+function moveDown(key) {
+    switch (key) {
+        case 83: // s Key
         {
-            if (x1 > 0) {
-                console.log(key)
-                x1 = x1 - 10;
-                ctx.save();
-                ctx.rotate(10);
-                ctx.restore();
+            if (y1 < 500) {
+                y1 = y1 + 10;
                 setCanvasBackground();
                 drawBlueCar();
                 drawGreenCar();
             }
         }
-    }    
-}
-
-function moveUp() {
-    if (y1 > 0) {
-        y1 = y1 - 10;
-        setCanvasBackground();
-        drawBlueCar();
-        drawGreenCar();
-    }
-}
-
-function moveRight() {
-    if (x1 < 650) {
-        x1 = x1 + 10;
-        setCanvasBackground();
-        drawBlueCar();
-        drawGreenCar();
-    }
-}
-
-function moveDown() {
-    if (y1 < 500) {
-        y1 = y1 + 10;
-        setCanvasBackground();
-        drawBlueCar();
-        drawGreenCar();
+        case 40: // Down Arrow Key
+        {
+            if (y1 < 500) {
+                y1 = y1 + 10;
+                setCanvasBackground();
+                drawBlueCar();
+                drawGreenCar();
+            }
+        }
     }
 }
