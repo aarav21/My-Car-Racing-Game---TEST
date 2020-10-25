@@ -133,7 +133,7 @@ function moveUp(key) {
                     drawGreenCar();
                 }
             }
-        case 36: // Up Arrow Key 
+        case 38: // Up Arrow Key 
             {
                 if (y1 > 0) {
                     y1 = y1 - 10;
